@@ -41,18 +41,19 @@ def minor(A,i,j):    # Return matrix A with the ith row and jth column deleted
   return minor
 
 def decrypt(matrix, words):
-    cipher = ''
-    length = len(matrix)
     print "matrix: ", matrix
-    det =  np.linalg.det(np.matrix(matrix))
-    det = int(float(str(det)))
+    # calcul de la matrice inverse
     matrix = np.rint(modMatInv(matrix, len(alphabet)))
     print "matrix inv :", matrix
 
+    # tableau des indices
     arr = np.array([alphabet.find(i) for i in words], dtype=int)
     print "arr:", arr
     count = 0
 
+    # produit matrice * colone
+    length = len(matrix)
+    cipher = ''
     for ch in words:
         number = sum(map(lambda v: v % len(alphabet), arr * matrix[count % length])) % len(alphabet);        
         number = int(float(str(number)))
